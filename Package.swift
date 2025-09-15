@@ -1,4 +1,4 @@
-// swift-tools-version:5.9
+// swift-tools-version:5.10
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import Foundation
@@ -150,7 +150,7 @@ extension Package {
         ),
         .target(
           name: "ZipkinExporter",
-          dependencies: ["OpenTelemetrySdk"],
+          dependencies: [.product(name: "OpenTelemetrySdk", package: "opentelemetry-swift-core")],
           path: "Sources/Exporters/Zipkin"
         ),
         .target(
