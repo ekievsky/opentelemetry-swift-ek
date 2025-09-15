@@ -93,10 +93,10 @@ let package = Package(
       ],
       path: "Sources/Exporters/OpenTelemetryProtocolHttp"
     ),
-    .target(
-      name: "StdoutExporter",
-      dependencies: [.product(name: "OpenTelemetrySdk", package: "opentelemetry-swift-core")]
-    ),
+//    .target(
+//      name: "StdoutExporter",
+//      dependencies: [.product(name: "OpenTelemetrySdk", package: "opentelemetry-swift-core")]
+//    ),
     .target(
       name: "InMemoryExporter",
       dependencies: [.product(name: "OpenTelemetrySdk", package: "opentelemetry-swift-core")],
@@ -126,13 +126,15 @@ let package = Package(
     .target(
         name: "OpenTelemetrySdk-EK",
         dependencies: [
-            .product(name: "OpenTelemetrySdk", package: "opentelemetry-swift-core")
+            .product(name: "OpenTelemetrySdk", package: "opentelemetry-swift-core"),
+            "OpenTelemetryApi-EK"
         ]
     ),
     .target(
         name: "StdoutExporter-EK",
         dependencies: [
-            .product(name: "StdoutExporter", package: "opentelemetry-swift-core")
+            .product(name: "StdoutExporter", package: "opentelemetry-swift-core"),
+            "OpenTelemetrySdk-EK"
         ]
     ),
   ]
