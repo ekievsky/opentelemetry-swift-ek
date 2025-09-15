@@ -23,6 +23,7 @@ let package = Package(
     .library(name: "InMemoryExporter", targets: ["InMemoryExporter"]),
     .library(name: "OTelSwiftLog", targets: ["OTelSwiftLog"]),
     .library(name: "BaggagePropagationProcessor", targets: ["BaggagePropagationProcessor"]),
+    .library(name: "OpenTelemetryApi-EK", targets: ["OpenTelemetryApi-EK"]),
   ],
   dependencies: [
     .package(url: "https://github.com/open-telemetry/opentelemetry-swift-core.git", from: "2.1.0"),
@@ -114,6 +115,12 @@ let package = Package(
 
       ],
       path: "Sources/Contrib/Processors/BaggagePropagationProcessor"
+    ),
+    .target(
+        name: "OpenTelemetryApi-EK",
+        dependencies: [
+            .product(name: "OpenTelemetryApi", package: "opentelemetry-swift-core")
+        ]
     ),
   ]
 ).addPlatformSpecific()
