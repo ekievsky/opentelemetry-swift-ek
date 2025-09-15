@@ -25,6 +25,7 @@ let package = Package(
     .library(name: "BaggagePropagationProcessor", targets: ["BaggagePropagationProcessor"]),
     .library(name: "OpenTelemetryApi-EK", targets: ["OpenTelemetryApi-EK"]),
     .library(name: "OpenTelemetrySdk-EK", targets: ["OpenTelemetrySdk-EK"]),
+    .library(name: "StdoutExporter-EK", targets: ["StdoutExporter-EK"]),
   ],
   dependencies: [
     .package(url: "https://github.com/open-telemetry/opentelemetry-swift-core.git", from: "2.1.0"),
@@ -126,6 +127,12 @@ let package = Package(
         name: "OpenTelemetrySdk-EK",
         dependencies: [
             .product(name: "OpenTelemetrySdk", package: "opentelemetry-swift-core")
+        ]
+    ),
+    .target(
+        name: "StdoutExporter-EK",
+        dependencies: [
+            .product(name: "StdoutExporter", package: "opentelemetry-swift-core")
         ]
     ),
   ]
