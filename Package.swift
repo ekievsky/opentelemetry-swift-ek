@@ -24,6 +24,7 @@ let package = Package(
     .library(name: "OTelSwiftLog", targets: ["OTelSwiftLog"]),
     .library(name: "BaggagePropagationProcessor", targets: ["BaggagePropagationProcessor"]),
     .library(name: "OpenTelemetryApi-EK", targets: ["OpenTelemetryApi-EK"]),
+    .library(name: "OpenTelemetrySdk-EK", targets: ["OpenTelemetrySdk-EK"]),
   ],
   dependencies: [
     .package(url: "https://github.com/open-telemetry/opentelemetry-swift-core.git", from: "2.1.0"),
@@ -91,11 +92,10 @@ let package = Package(
       ],
       path: "Sources/Exporters/OpenTelemetryProtocolHttp"
     ),
-//    .target(
-//      name: "StdoutExporter",
-//      dependencies: [.product(name: "OpenTelemetrySdk", package: "opentelemetry-swift-core")],
-//      path: "Sources/Exporters/Stdout"
-//    ),
+    .target(
+      name: "StdoutExporter",
+      dependencies: [.product(name: "OpenTelemetrySdk", package: "opentelemetry-swift-core")]
+    ),
     .target(
       name: "InMemoryExporter",
       dependencies: [.product(name: "OpenTelemetrySdk", package: "opentelemetry-swift-core")],
@@ -120,6 +120,12 @@ let package = Package(
         name: "OpenTelemetryApi-EK",
         dependencies: [
             .product(name: "OpenTelemetryApi", package: "opentelemetry-swift-core")
+        ]
+    ),
+    .target(
+        name: "OpenTelemetrySdk-EK",
+        dependencies: [
+            .product(name: "OpenTelemetrySdk", package: "opentelemetry-swift-core")
         ]
     ),
   ]
