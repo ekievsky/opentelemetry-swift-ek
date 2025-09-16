@@ -59,11 +59,6 @@ let package = Package(
       path: "Sources/Exporters/OpenTelemetryProtocolHttp"
     ),
     .target(
-      name: "InMemoryExporter",
-      dependencies: [.product(name: "OpenTelemetrySdk", package: "opentelemetry-swift-core")],
-      path: "Sources/Exporters/InMemory"
-    ),
-    .target(
         name: "OpenTelemetryApi-EK",
         dependencies: [
             .product(name: "OpenTelemetryApi", package: "opentelemetry-swift-core")
@@ -93,7 +88,6 @@ extension Package {
       products.append(contentsOf: [
         .library(name: "NetworkStatus", targets: ["NetworkStatus"]),
         .library(name: "URLSessionInstrumentation", targets: ["URLSessionInstrumentation"]),
-        .library(name: "SignPostIntegration", targets: ["SignPostIntegration"]),
         .library(name: "ResourceExtension", targets: ["ResourceExtension"]),
       ])
       targets.append(contentsOf: [
@@ -111,14 +105,6 @@ extension Package {
             .product(name: "OpenTelemetrySdk", package: "opentelemetry-swift-core"),
             "NetworkStatus"],
           path: "Sources/Instrumentation/URLSession",
-          exclude: ["README.md"]
-        ),
-        .target(
-          name: "SignPostIntegration",
-          dependencies: [
-            .product(name: "OpenTelemetrySdk", package: "opentelemetry-swift-core")
-          ],
-          path: "Sources/Instrumentation/SignPostIntegration",
           exclude: ["README.md"]
         ),
         .target(
