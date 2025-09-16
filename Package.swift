@@ -11,18 +11,10 @@ let package = Package(
     .iOS(.v13),
   ],
   products: [
-//    .library(name: "OpenTelemetryApi", targets: ["OpenTelemetryApi"]),
-//    .library(name: "OpenTelemetryConcurrency", targets: ["OpenTelemetryConcurrency"]),
-//    .library(name: "OpenTelemetrySdk", targets: ["OpenTelemetrySdk"]),
-    .library(name: "SwiftMetricsShim", targets: ["SwiftMetricsShim"]),
-//    .library(name: "StdoutExporter", targets: ["StdoutExporter"]),
     .library(
       name: "OpenTelemetryProtocolExporterHTTP", targets: ["OpenTelemetryProtocolExporterHttp"]
     ),
-    .library(name: "PersistenceExporter", targets: ["PersistenceExporter"]),
-    .library(name: "InMemoryExporter", targets: ["InMemoryExporter"]),
     .library(name: "OTelSwiftLog", targets: ["OTelSwiftLog"]),
-    .library(name: "BaggagePropagationProcessor", targets: ["BaggagePropagationProcessor"]),
     .library(name: "OpenTelemetryApi-EK", targets: ["OpenTelemetryApi-EK"]),
     .library(name: "OpenTelemetrySdk-EK", targets: ["OpenTelemetrySdk-EK"]),
     .library(name: "StdoutExporter-EK", targets: ["StdoutExporter-EK"]),
@@ -35,24 +27,6 @@ let package = Package(
     .package(url: "https://github.com/mw99/DataCompression", from: "3.9.0")
   ],
   targets: [
-//    .target(
-//      name: "OpenTelemetryApi",
-//      dependencies: []
-//    ),
-//    .target(
-//      name: "OpenTelemetrySdk",
-//      dependencies: [
-//        "OpenTelemetryApi",
-//      ]
-//    ),
-//    .target(
-//      name: "OpenTelemetryConcurrency",
-//      dependencies: ["OpenTelemetryApi"]
-//    ),
-//    .target(
-//      name: "OpenTelemetryTestUtils",
-//      dependencies: ["OpenTelemetryApi", "OpenTelemetrySdk"]
-//    ),
     .target(
       name: "OTelSwiftLog",
       dependencies: [
@@ -60,15 +34,6 @@ let package = Package(
         .product(name: "Logging", package: "swift-log")
       ],
       path: "Sources/Bridges/OTelSwiftLog",
-      exclude: ["README.md"]
-    ),
-    .target(
-      name: "SwiftMetricsShim",
-      dependencies: [
-        .product(name: "OpenTelemetrySdk", package: "opentelemetry-swift-core"),
-        .product(name: "CoreMetrics", package: "swift-metrics")
-      ],
-      path: "Sources/Importers/SwiftMetricsShim",
       exclude: ["README.md"]
     ),
     .target(
@@ -93,29 +58,10 @@ let package = Package(
       ],
       path: "Sources/Exporters/OpenTelemetryProtocolHttp"
     ),
-//    .target(
-//      name: "StdoutExporter",
-//      dependencies: [.product(name: "OpenTelemetrySdk", package: "opentelemetry-swift-core")]
-//    ),
     .target(
       name: "InMemoryExporter",
       dependencies: [.product(name: "OpenTelemetrySdk", package: "opentelemetry-swift-core")],
       path: "Sources/Exporters/InMemory"
-    ),
-    .target(
-      name: "PersistenceExporter",
-      dependencies: [.product(name: "OpenTelemetrySdk", package: "opentelemetry-swift-core")],
-      path: "Sources/Exporters/Persistence",
-      exclude: ["README.md"]
-    ),
-    .target(
-      name: "BaggagePropagationProcessor",
-      dependencies: [
-        .product(name: "OpenTelemetryApi", package: "opentelemetry-swift-core"),
-        .product(name: "OpenTelemetrySdk", package: "opentelemetry-swift-core")
-
-      ],
-      path: "Sources/Contrib/Processors/BaggagePropagationProcessor"
     ),
     .target(
         name: "OpenTelemetryApi-EK",
@@ -147,9 +93,6 @@ extension Package {
       products.append(contentsOf: [
         .library(name: "NetworkStatus", targets: ["NetworkStatus"]),
         .library(name: "URLSessionInstrumentation", targets: ["URLSessionInstrumentation"]),
-        .library(name: "ZipkinExporter", targets: ["ZipkinExporter"]),
-//        .executable(name: "OTLPExporter", targets: ["OTLPExporter"]),
-//        .executable(name: "OTLPHTTPExporter", targets: ["OTLPHTTPExporter"]),
         .library(name: "SignPostIntegration", targets: ["SignPostIntegration"]),
         .library(name: "ResourceExtension", targets: ["ResourceExtension"]),
       ])
@@ -169,11 +112,6 @@ extension Package {
             "NetworkStatus"],
           path: "Sources/Instrumentation/URLSession",
           exclude: ["README.md"]
-        ),
-        .target(
-          name: "ZipkinExporter",
-          dependencies: [.product(name: "OpenTelemetrySdk", package: "opentelemetry-swift-core")],
-          path: "Sources/Exporters/Zipkin"
         ),
         .target(
           name: "SignPostIntegration",
